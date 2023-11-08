@@ -4,12 +4,18 @@ from datetime import datetime, timedelta
 import tools
 
 class Wypozyczenie:
-    def __init__(self, id, przebieg):
-         self.id_wypozyczenia = id
-         self.typ = random.choice(['calodobowy', 'nieograniczony'])
-         self.czas_wypozyczenia, self.czas_zakonczenia = self.create_rental_time()
-         self.przebieg = przebieg
-         self.poziom_paliwa = str(random.randint(0, 100))
+    def __init__(self, id, przebieg, id_samochodu, id_odoby, id_miejsca_rozpoczecia, id_miejsca_zakonczenia):
+        self.id_wypozyczenia = id
+        self.typ = random.choice(['calodobowy', 'nieograniczony'])
+        self.czas_wypozyczenia, self.czas_zakonczenia = self.create_rental_time()
+        self.przebieg = przebieg
+        self.poziom_paliwa = str(random.randint(0, 100))
+        self.id_samochodu = id_samochodu
+        self.id_odoby = id_odoby
+        self.id_miejsca_rozpoczecia = id_miejsca_rozpoczecia
+        self.id_miejsca_zakonczenia = id_miejsca_zakonczenia
+
+
 
     def create_rental_time(self):
         d1 = datetime.strptime('1/1/2019 1:30 PM', '%m/%d/%Y %I:%M %p')
