@@ -15,3 +15,9 @@ class Generator:
         print(wypozyczenie)
         print(miejsce)
 
+    def generate_data(self):
+
+    def generate_cars(self):
+
+    def generate_users(self):
+
