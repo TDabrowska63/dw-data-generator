@@ -2,12 +2,12 @@ import random
 import names
 
 class Zgloszenia:
-    def init(self, Id_zgloszenia):
+    def __init__(self, Id_zgloszenia):
+        self.Id_zgloszenia = Id_zgloszenia
         self.Zglaszany_nr_rejestracyjny = None
         self.Nr_telefonu = None
         self.Godzina_wpisu = None
         self.Data_wpisu = None
-        self.Id_zgloszenia = Id_zgloszenia
         self.ID_Pracownika = str(random.randint(0, 1000))
         self.Imie = names.get_first_name()
         self.Nazwisko = names.get_last_name()
@@ -50,4 +50,4 @@ class Zgloszenia:
             + ";" + str(self.Id_zgloszenia) \
             + ";" + str(self.Zglaszany_nr_rejestracyjny) \
             + ";" + str(self.Powod) \
-            + ";" + str(self.Potwierdzone)
+            + ";" + str(self.Potwierdzone) + "\n"
