@@ -4,7 +4,7 @@ class Miejsca:
     def __init__(self, Id_miejsca):
         self.Id_miejsca = Id_miejsca
         self.Miasto = ""
-        self.Wspolrzedne
+        self.Wspolrzedne = ""
         self.czy_miejsce_dedykowane = random.randint(0, 1)
 
 
