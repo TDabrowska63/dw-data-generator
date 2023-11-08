@@ -6,6 +6,7 @@ class Generator:
     def __init__(self):
         samochod = Samochod()
         uzytkownik = Uzytkownik()
+
         print(samochod)
         print(uzytkownik)
 
