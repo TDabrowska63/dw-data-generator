@@ -20,9 +20,9 @@ class Wypozyczenie:
         return start_time, end_time
 
     def __str__(self):
-        return str(self.id_wypozyczenia) \
-            + ";" + str(self.typ) \
-            + ";" + str(self.czas_wypozyczenia) \
-            + ";" + str(self.czas_zakonczenia) \
-            + ";" + str(self.przebieg) \
-            + ";" + str(self.poziom_paliwa) + "\n"
+        return f"{str(self.id_wypozyczenia)}|" \
+               f"{str(self.typ)}|" \
+               f"{str(self.czas_wypozyczenia)}|" \
+               f"{str(self.czas_zakonczenia)}|" \
+               f"{str(self.przebieg)}|" \
+               f"{str(self.poziom_paliwa)}\n"

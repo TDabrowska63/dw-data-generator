@@ -34,4 +34,7 @@ class Uzytkownik:
 
 
     def __str__(self):
-        return str(self.nr_prawa_jazdy) + ";" + str(self.imie) + ";" + str(self.nazwisko) + ";" + str(self.miasto_zamieszkania) + "\n"
+        return f"{str(self.nr_prawa_jazdy)}|" \
+               f"{str(self.imie)}|" \
+               f"{str(self.nazwisko)}|" \
+               f"{str(self.miasto_zamieszkania)}\n"
