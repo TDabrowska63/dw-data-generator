@@ -19,4 +19,6 @@ class Samochod:
             self.nr_rejestracyjny += random.choice('ACEFGHJKLMNPRSTUWXYZ0123456789')
 
     def __str__(self):
-        return str(self.nr_rejestracyjny) + ";" + str(self.marka) + ";" + str(self.typ) + "\n"
+        return f"{str(self.nr_rejestracyjny)}|" \
+               f"{str(self.marka)}|" \
+               f"{str(self.typ)}\n"
