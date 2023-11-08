@@ -13,6 +13,7 @@ class Generator:
         self.cars_list = []
         self.rental_list = []
         self.opinion_list = []
+        self.places_list = []
         self.generate_cars()
         self.generate_users()
         self.generate_rents()
@@ -24,9 +25,16 @@ class Generator:
         miejsce_zak = Miejsce(id_miejsca)
         with open('./bulks/rents.bulk', 'w', encoding="utf-8") as file:
             for i in range(self.number_of_records):
-                miejsce_rozp = miejsce_zak
-                id_miejsca += 1
+                miejsce_rozp = Miejsce(id_miejsca)
+                miejsce_rozp.czy_miejsce_dedykowane = miejsce_zak.czy_miejsce_dedykowane
+                miejsce_rozp.miasto = miejsce_zak.miasto
+                miejsce_rozp.wspolrzedne = miejsce_zak.wspolrzedne
+                id_miejsca = id_miejsca + 1
                 miejsce_zak = Miejsce(id_miejsca)
+                id_miejsca = id_miejsca + 1
+                self.places_list.append(miejsce_rozp)
+                self.places_list.append(miejsce_zak)
+
                 samochod = random.choice(self.cars_list)
                 podlista = [r for r in self.rental_list if r.nr_rejestracyjny_samochodu == samochod.nr_rejestracyjny]
                 przebieg = random.randint(0, 100)
@@ -39,6 +47,10 @@ class Generator:
                 wypozyczenie = Wypozyczenie(i, przebieg, samochod.nr_rejestracyjny, uzytkownik.nr_prawa_jazdy, miejsce_rozp.id_miejsca, miejsce_zak.id_miejsca)
                 self.rental_list.append(wypozyczenie)
                 file.write(str(wypozyczenie))
+
+        with open('./bulks/places.bulk', 'w', encoding="utf-8") as file:
+            for place in self.places_list:
+                file.write(str(place))
 
     def generate_opinions(self):
         with open('./bulks/opinions.bulk', 'w', encoding="utf-8") as file:

@@ -1,19 +1,18 @@
 --CREATE DATABASE UrbanDrive
 
-
 use UrbanDrive
 
 CREATE TABLE Miejsca
 (
-ID_Miejsca INT IDENTITY(1,1) PRIMARY KEY,
+ID_Miejsca INT PRIMARY KEY,
 Wspolrzedne VARCHAR(100) NOT NULL,
-Nazwa_miasta VARCHAR(20) NOT NULL,
+Nazwa_miasta VARCHAR(50) NOT NULL,
 Czy_miejsce_dedykowane CHAR(1) NOT NULL CHECK(Czy_miejsce_dedykowane in ('Y', 'N'))
 )
 
 CREATE TABLE Samochody
 (
-Nr_rejestracyjny CHAR(7) PRIMARY KEY,
+Nr_rejestracyjny CHAR(9) PRIMARY KEY,
 Marka VARCHAR(20) NOT NULL,
 Typ CHAR(20) NOT NULL CHECK (Typ in ('Osobowy', 'Dostawczy'))
 )
@@ -28,13 +27,13 @@ Miasto_zamieszkania VARCHAR(20) NOT NULL,
 
 CREATE TABLE Wypozyczenia
 (
-ID_wypozyczenia INT IDENTITY(1,1) PRIMARY KEY,
-Typ CHAR NOT NULL CHECK(Typ in ('calodobowy', 'nieograniczony')),
+ID_wypozyczenia INT PRIMARY KEY,
+Typ VARCHAR(15) NOT NULL CHECK(Typ in ('calodobowy', 'nieograniczony')),
 Czas_rozpoczecia DATE NOT NULL,
 Czas_zakonczenia DATE DEFAULT NULL,
 Przebieg INT,
 Poziom_paliwa INT CHECK(Poziom_paliwa >=0 AND Poziom_paliwa<=100),
-ID_samochodu CHAR(7),
+ID_samochodu CHAR(9),
 ID_Osoby CHAR(13),
 ID_Miejsca_rozpoczecia INT,
 ID_Miejsca_zakonczenia INT,
@@ -56,6 +55,11 @@ Powod INT CHECK(Powod >= 0 AND Powod <= 27),
 FOREIGN KEY (ID_wypozyczenia) REFERENCES Wypozyczenia(ID_wypozyczenia)
 )
 
+BULK INSERT dbo.Samochody FROM "C:\Users\TH3V1LPL4Y3R\Desktop\data gen\dw-data-generator\bulks\cars.bulk" WITH (FIELDTERMINATOR='|') --manually set
+BULK INSERT dbo.Uzytkownicy FROM "C:\Users\TH3V1LPL4Y3R\Desktop\data gen\dw-data-generator\bulks\users.bulk" WITH (FIELDTERMINATOR='|') --manually set
+BULK INSERT dbo.Miejsca FROM "C:\Users\TH3V1LPL4Y3R\Desktop\data gen\dw-data-generator\bulks\places.bulk" WITH (FIELDTERMINATOR='|') --manually set
+BULK INSERT dbo.Wypozyczenia FROM "C:\Users\TH3V1LPL4Y3R\Desktop\data gen\dw-data-generator\bulks\rents.bulk" WITH (FIELDTERMINATOR='|') --manually set
+BULK INSERT dbo.OcenyPrzejazdu FROM "C:\Users\TH3V1LPL4Y3R\Desktop\data gen\dw-data-generator\bulks\opinions.bulk" WITH (FIELDTERMINATOR='|') --manually set
 
 select * from Miejsca
 select * from Wypozyczenia
@@ -64,6 +68,13 @@ select * from OcenyPrzejazdu
 select * from Samochody
 
 /*
+drop TABLE Miejsca
+drop TABLE Wypozyczenia
+drop TABLE Uzytkownicy
+drop TABLE OcenyPrzejazdu
+drop TABLE Samochody
+
+
 drop database UrbanDrive
 
 */
