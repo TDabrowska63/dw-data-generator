@@ -1,6 +1,6 @@
 import random
 import names
-from tools import random_date
+from tools import random_date, create_license_plate_num
 from datetime import datetime, timedelta
 
 class Zgloszenia:
@@ -15,10 +15,10 @@ class Zgloszenia:
         self.nazwisko = names.get_last_name()
         self.create_telephone_number()
         self.car_list = car_list
-        self.create_car()       #placeholder
         self.create_entry_date_and_time()
         self.powod = str(random.randint(0, 27))
         self.potwierdzone = ""
+        self.create_car()  # placeholder
 
     def create_telephone_number(self):
         for _ in range(9):
@@ -31,7 +31,8 @@ class Zgloszenia:
             self.zglaszany_nr_rejestracyjny = car.nr_rejestracyjny
             self.potwierdzone = random.choice(['Y', 'N'])
         else:
-            pass
+            self.zglaszany_nr_rejestracyjny = create_license_plate_num()
+            self.potwierdzone = "N"
 
 
     def create_entry_date_and_time(self):
