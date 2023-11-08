@@ -1,6 +1,7 @@
 from tables.samochody import Samochod
 from tables.uzytkownicy import Uzytkownik
 from tables.wypozyczenia import Wypozyczenie
+from tables.miejsca import Miejsce
 
 
 class Generator:
@@ -8,7 +9,9 @@ class Generator:
         samochod = Samochod()
         uzytkownik = Uzytkownik()
         wypozyczenie = Wypozyczenie(1, 300)
+        miejsce = Miejsce(1)
         print(samochod)
         print(uzytkownik)
         print(wypozyczenie)
+        print(miejsce)
 
