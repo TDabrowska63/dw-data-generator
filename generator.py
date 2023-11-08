@@ -16,8 +16,14 @@ class Generator:
         print(miejsce)
 
     def generate_data(self):
+        pass
+    def generate_cars(self, num_of_records):
+        with open('./bulks/cars.bulk', 'w', encoding="utf-8") as file:
+            file.write("nr_rejestracyjny;marka;typ\n")
+            for _ in range(num_of_records):
+                car = Samochod()
+                file.write(str(car))
 
-    def generate_cars(self):
 
     def generate_users(self):
-
+        
