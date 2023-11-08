@@ -1,5 +1,11 @@
+from tables.samochody import Samochod
+from tables.uzytkownicy import Uzytkownik
+
 
 class Generator:
-
     def __init__(self):
-        print("Hello world!")
+        samochod = Samochod()
+        uzytkownik = Uzytkownik()
+        print(samochod)
+        print(uzytkownik)
+
