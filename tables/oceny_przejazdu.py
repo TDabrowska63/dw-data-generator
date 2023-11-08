@@ -11,8 +11,8 @@ class Oceny_przejazdu:
             self.Powod = 0
 
     def __str__(self):
-        return str(self.Id_wypozyczenia) \
-            + ";" + str(self.Ocena_predkosci) \
-            + ";" + str(self.Ocena_techniki_jazdy) \
-            + ";" + str(self.Ocena_uzytkownika) \
-            + ";" + str(self.Powod) + "\n"
+        return f"{str(self.Id_wypozyczenia)}|" \
+               f"{str(self.Ocena_predkosci)}|" \
+               f"{str(self.Ocena_techniki_jazdy)}|" \
+               f"{str(self.Ocena_uzytkownika)}|" \
+               f"{str(self.Powod)}\n"
