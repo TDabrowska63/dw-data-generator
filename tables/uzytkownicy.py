@@ -24,7 +24,7 @@ class Uzytkownik:
         cities = gc.get_cities()
         pomorskie_cities = []
         for city in cities.values():
-            if city.get('countrycode') == 'PL' and city.get('admin1_code') == '82':
+            if city.get('countrycode') == 'PL' and city.get('admin1code') == '82':
                 pomorskie_cities.append(city)
         if pomorskie_cities:
             city = random.choice(pomorskie_cities)
