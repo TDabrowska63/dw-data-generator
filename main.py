@@ -4,9 +4,7 @@ from generate_csv.create_zgloszenia import generate_zgloszenia
 
 def main():
 
-    generate_zgloszenia(300)
-    generator = Generator()
-
+    generator = Generator(5)
 
 if __name__ == '__main__':
     main()

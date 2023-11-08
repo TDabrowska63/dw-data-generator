@@ -4,7 +4,7 @@ from tools import random_date
 from datetime import datetime, timedelta
 
 class Zgloszenia:
-    def __init__(self, id_zgloszenia):
+    def __init__(self, id_zgloszenia, car_list):
         self.id_zgloszenia = id_zgloszenia
         self.zglaszany_nr_rejestracyjny = ""
         self.nr_telefonu = ""
@@ -14,18 +14,25 @@ class Zgloszenia:
         self.imie = names.get_first_name()
         self.nazwisko = names.get_last_name()
         self.create_telephone_number()
+        self.car_list = car_list
         self.create_car()       #placeholder
         self.create_entry_date_and_time()
         self.powod = str(random.randint(0, 27))
-        self.potwierdzone = str(random.randint(0, 1))
+        self.potwierdzone = ""
 
     def create_telephone_number(self):
         for _ in range(9):
             self.nr_telefonu = self.nr_telefonu + str(random.randint(0, 9))
 
     def create_car(self):
-        for _ in range(9):
-            self.zglaszany_nr_rejestracyjny += str(random.randint(0, 9))
+        chance = random.randint(0, 100)
+        if chance <= 80:
+            car = random.choice(self.car_list)
+            self.zglaszany_nr_rejestracyjny = car.nr_rejestracyjny
+            self.potwierdzone = random.choice(['Y', 'N'])
+        else:
+            pass
+
 
     def create_entry_date_and_time(self):
         d1 = datetime.strptime('1/1/2019 1:30 PM', '%m/%d/%Y %I:%M %p')
