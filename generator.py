@@ -19,5 +19,11 @@ class Generator:
 
     def generate_cars(self):
 
-    def generate_users(self):
+    def generate_users(self, number_of_users):
+        with open('./bulks/Uzytkownicy.bulk', 'w', encoding="utf-8") as file:
+            for i in range(number_of_users):
+                uzytkownik = Uzytkownik()
+                file.write(str(uzytkownik))
+
+
 
