@@ -4,33 +4,38 @@ import names
 class Zgloszenia:
     def __init__(self, Id_zgloszenia):
         self.Id_zgloszenia = Id_zgloszenia
-        self.Zglaszany_nr_rejestracyjny = None
-        self.Nr_telefonu = None
-        self.Godzina_wpisu = None
-        self.Data_wpisu = None
+        self.Zglaszany_nr_rejestracyjny = ''
+        self.Nr_telefonu = ''
+        self.Godzina_wpisu = ''
+        self.Data_wpisu = ''
         self.ID_Pracownika = str(random.randint(0, 1000))
         self.Imie = names.get_first_name()
         self.Nazwisko = names.get_last_name()
         self.create_telephone_number()
         self.create_car()       #placeholder
+        self.create_entry_date()
+        self.create_entry_time()
         self.Powod = str(random.randint(0, 27))
         self.Potwierdzone = str(random.randint(0, 1))
 
-    def create_telephonenumber(self):
+    def create_telephone_number(self):
         for _ in range(9):
-            self.Nr_telefonu += str(random.randint(0, 9))
+            self.Nr_telefonu = self.Nr_telefonu + str(random.randint(0, 9))
 
-    def createcar(self):
+    def create_car(self):
         for _ in range(9):
             self.Zglaszany_nr_rejestracyjny += str(random.randint(0, 9))
 
     def create_entry_time(self):
-        self.Godzina_wpisu = self.fill_with_zero(1, 12) + ':' + self.fill_with_zero(0, 60)
+        hour = self.fill_with_zero(1, 12)
+        minute = self.fill_with_zero(0, 60)
+        self.Godzina_wpisu = hour + ':' + minute
 
     def create_entry_date(self):
-        self.Data_wpisu = str(random.randint(2019, 2024)) \
-                          + '-' + self.fill_with_zero(1, 12)\
-                          + '-' + self.fill_with_zero(1, 31)
+        day = self.fill_with_zero(1, 31)
+        month = self.fill_with_zero(1, 12)
+        year = str(random.randint(2019, 2024))
+        self.Data_wpisu = year + '-' + month + '-' + day
 
     def fill_with_zero(self, start, end):
         num = random.randint(start, end)
@@ -40,7 +45,7 @@ class Zgloszenia:
             string = str(num)
 
         return string
-    def str(self):
+    def __str__(self):
         return str(self.ID_Pracownika) \
             + ";" + str(self.Data_wpisu) \
             + ";" + str(self.Godzina_wpisu) \
