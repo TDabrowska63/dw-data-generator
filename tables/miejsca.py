@@ -10,7 +10,6 @@ class Miejsce:
         self.czy_miejsce_dedykowane = random.choice(["Y", "N"])
         self.create_city()
 
-
     def create_city(self):
         gc = GeonamesCache()
         cities = gc.get_cities()
