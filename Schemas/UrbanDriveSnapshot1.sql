@@ -1,6 +1,6 @@
---CREATE DATABASE UrbanDrive
+CREATE DATABASE UrbanDriveSnapshot1
 
-use UrbanDrive
+use UrbanDriveSnapshot1
 
 CREATE TABLE Miejsca
 (

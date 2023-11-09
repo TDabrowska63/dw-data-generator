@@ -11,6 +11,8 @@ from tools import create_city
 
 class Generator:
     def __init__(self, n):
+        self.id_miejsca = 1
+        self.id_rent = 1
         self.users_list = []
         self.cars_list = []
         self.rental_list = []
@@ -19,16 +21,15 @@ class Generator:
         self.report_list = []
         self.generate_snapshot_1(n)
 
-        self.generate_snapshot_2(2)
+        self.generate_snapshot_2(2, n)
 
     def generate_rents(self, n):
-        id_miejsca = 1
-        for i in range(n):
+        for _ in range(n):
 
-            miejsce_rozp = Miejsce(id_miejsca)
-            id_miejsca = id_miejsca + 1
-            miejsce_zak = Miejsce(id_miejsca)
-            id_miejsca = id_miejsca + 1
+            miejsce_rozp = Miejsce(self.id_miejsca)
+            self.id_miejsca += 1
+            miejsce_zak = Miejsce(self.id_miejsca)
+            self.id_miejsca += 1
             self.places_list.append(miejsce_rozp)
             self.places_list.append(miejsce_zak)
 
@@ -46,8 +47,9 @@ class Generator:
 
             uzytkownik = random.choice(self.users_list)
 
-            wypozyczenie = Wypozyczenie(i, przebieg, samochod.nr_rejestracyjny, uzytkownik.nr_prawa_jazdy,
+            wypozyczenie = Wypozyczenie(self.id_rent, przebieg, samochod.nr_rejestracyjny, uzytkownik.nr_prawa_jazdy,
                                         miejsce_rozp.id_miejsca, miejsce_zak.id_miejsca)
+            self.id_rent += 1
             self.rental_list.append(wypozyczenie)
 
     def write_all(self, folder_name):
@@ -72,11 +74,16 @@ class Generator:
                 file.write(str(rent))
 
 
-    def generate_opinions(self):
-        for rent in self.rental_list:
-            opinion = Oceny_przejazdu(rent.id_wypozyczenia)
-            self.opinion_list.append(opinion)
-
+    def generate_opinions(self, n):
+        if n == 0:
+            for rent in self.rental_list:
+                opinion = Oceny_przejazdu(rent.id_wypozyczenia)
+                self.opinion_list.append(opinion)
+        else:
+            podlista = self.rental_list[n:]
+            for rent in podlista:
+                opinion = Oceny_przejazdu(rent.id_wypozyczenia)
+                self.opinion_list.append(opinion)
     def generate_cars(self, n):
         for _ in range(n):
             car = Samochod()
@@ -92,17 +99,17 @@ class Generator:
         self.generate_cars(n)
         self.generate_users(n)
         self.generate_rents(2*n)
-        self.generate_opinions()
+        self.generate_opinions(0)
         self.report_list = generate_zgloszenia(n, self.cars_list)
         self.write_all('bulks')
         write_reports('zgloszenia1.csv', self.report_list)
 
 
 
-    def generate_snapshot_2(self, n):
-        num_of_users = random.randint(0, n)
+    def generate_snapshot_2(self, n2, n1):
+        num_of_users = random.randint(0, n2)
         for _ in range(num_of_users):
-            i = random.randint(0, n-1)
+            i = random.randint(0, n2-1)
             change = random.choice(['imie', 'nazwisko', 'adres'])
             if change == 'imie':
                 self.users_list[i].imie = names.get_first_name()
@@ -111,11 +118,11 @@ class Generator:
             else:
                 self.users_list[i].miasto_zamieszkania = create_city().get('name')
 
-        self.generate_cars(n)
-        self.generate_users(n)
-        self.generate_rents(3*n)
-        self.generate_opinions()
-        new_reports = generate_zgloszenia(n, self.cars_list)
+        self.generate_cars(n2)
+        self.generate_users(n2)
+        self.generate_rents(3*n2)
+        self.generate_opinions(2*n1)
+        new_reports = generate_zgloszenia(n2, self.cars_list)
         self.report_list.extend(new_reports)
         self.write_all('bulks2')
         write_reports('zgloszenia2.csv', self.report_list)

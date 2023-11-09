@@ -1,4 +1,4 @@
---CREATE DATABASE UrbanDrive
+CREATE DATABASE UrbanDriveSnapshot2
 
 use UrbanDrive
 
