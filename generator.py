@@ -5,6 +5,7 @@ from tables.miejsca import Miejsce
 from tables.oceny_przejazdu import Oceny_przejazdu
 from generate_csv.create_zgloszenia import generate_zgloszenia
 import random
+import names
 
 class Generator:
     def __init__(self, number_of_records):
@@ -19,8 +20,8 @@ class Generator:
         self.generate_rents()
         self.generate_opinions()
         generate_zgloszenia(number_of_records, self.cars_list)
+        self.generate_snapshot_2()
 
-        generate_snapshot2
 
     def generate_rents(self):
         id_miejsca = 1
@@ -78,3 +79,15 @@ class Generator:
                 uzytkownik = Uzytkownik()
                 self.users_list.append(uzytkownik)
                 file.write(str(uzytkownik))
+
+
+    def generate_snapshot_2(self):
+        num_of_users = random.randint(self.number_of_records)
+        for _ in range(num_of_users):
+            i = random.randint(0, num_of_users-1)
+            change = random.choice(['imie', 'nazwisko', 'adres'])
+            if change == 'imie':
+                self.users_list[i].imie = names.get_first_name()
+            elif change == 'nazwisko':
+                self.users_list[i].nazwisko = names.get_last_name()
+            else:

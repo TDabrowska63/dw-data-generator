@@ -10,6 +10,7 @@ class Uzytkownik:
         self.miasto_zamieszkania = ""
         self.create_driving_license_num()
         self.create_city()
+        self.miasto_zamieszkania = self.create_city()
 
 
     def create_driving_license_num(self):
@@ -30,7 +31,7 @@ class Uzytkownik:
             city = random.choice(pomorskie_cities)
         else:
             city = random.choice(list(cities.values()))
-        self.miasto_zamieszkania = city.get('name')
+        return city.get('name')
 
 
     def __str__(self):
