@@ -122,6 +122,11 @@ class Generator:
         self.generate_users(n2)
         self.generate_rents(3*n2)
         self.generate_opinions(2*n1)
+        num_of_changes = random.randint(1, len(self.report_list))
+        for _ in range(num_of_changes):
+            i = random.randint(0, 2 * n1 - 1)
+
+
         new_reports = generate_zgloszenia(n2, self.cars_list)
         self.report_list.extend(new_reports)
         self.write_all('bulks2')
