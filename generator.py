@@ -124,7 +124,7 @@ class Generator:
         self.generate_opinions(2*n1)
         num_of_changes = random.randint(3, len(self.report_list))
         for _ in range(num_of_changes):
-            i = random.randint(0, 2 * n1 - 1)
+            i = random.randint(0, n1 - 1)
             license_plate = self.report_list[i].zglaszany_nr_rejestracyjny
             if self.report_list[i].potwierdzone == 'N' and license_plate in [car.nr_rejestracyjny for car in self.cars_list]:
                 self.report_list[i].potwierdzone = 'Y'
