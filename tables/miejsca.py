@@ -1,6 +1,6 @@
 from geonamescache import GeonamesCache
 import random
-from tools import create_cities
+from tools import create_city
 
 
 class Miejsce:
@@ -12,7 +12,7 @@ class Miejsce:
         self.get_city()
 
     def get_city(self):
-        city =
+        city = create_city()
         self.miasto = city.get('name')
         longi = city.get('longitude') + random.uniform(-0.05, 0.05)
         lati = city.get('latitude') + random.uniform(-0.05, 0.05)
