@@ -122,10 +122,12 @@ class Generator:
         self.generate_users(n2)
         self.generate_rents(3*n2)
         self.generate_opinions(2*n1)
-        num_of_changes = random.randint(1, len(self.report_list))
+        num_of_changes = random.randint(3, len(self.report_list))
         for _ in range(num_of_changes):
             i = random.randint(0, 2 * n1 - 1)
-
+            license_plate = self.report_list[i].zglaszany_nr_rejestracyjny
+            if self.report_list[i].potwierdzone == 'N' and license_plate in [car.nr_rejestracyjny for car in self.cars_list]:
+                self.report_list[i].potwierdzone = 'Y'
 
         new_reports = generate_zgloszenia(n2, self.cars_list)
         self.report_list.extend(new_reports)
