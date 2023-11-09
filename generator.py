@@ -20,6 +20,8 @@ class Generator:
         self.generate_opinions()
         generate_zgloszenia(number_of_records, self.cars_list)
 
+        generate_snapshot2
+
     def generate_rents(self):
         id_miejsca = 1
         miejsce_zak = Miejsce(id_miejsca)
