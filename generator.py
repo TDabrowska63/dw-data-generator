@@ -6,6 +6,7 @@ from tables.oceny_przejazdu import Oceny_przejazdu
 from generate_csv.create_zgloszenia import generate_zgloszenia
 import random
 import names
+from tools import create_city
 
 class Generator:
     def __init__(self, number_of_records):
@@ -91,3 +92,4 @@ class Generator:
             elif change == 'nazwisko':
                 self.users_list[i].nazwisko = names.get_last_name()
             else:
+                self.users_list[i].miasto_zamieszkania = create_city()

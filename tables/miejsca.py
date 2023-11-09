@@ -1,5 +1,6 @@
 from geonamescache import GeonamesCache
 import random
+from tools import create_cities
 
 
 class Miejsce:
@@ -8,19 +9,10 @@ class Miejsce:
         self.miasto = ""
         self.wspolrzedne = ""
         self.czy_miejsce_dedykowane = random.choice(["Y", "N"])
-        self.create_city()
+        self.get_city()
 
-    def create_city(self):
-        gc = GeonamesCache()
-        cities = gc.get_cities()
-        pomorskie_cities = []
-        for city in cities.values():
-            if city.get('countrycode') == 'PL' and city.get('admin1code') == '82':
-                pomorskie_cities.append(city)
-        if pomorskie_cities:
-            city = random.choice(pomorskie_cities)
-        else:
-            city = random.choice(list(cities.values()))
+    def get_city(self):
+        city =
         self.miasto = city.get('name')
         longi = city.get('longitude') + random.uniform(-0.05, 0.05)
         lati = city.get('latitude') + random.uniform(-0.05, 0.05)
