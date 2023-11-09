@@ -25,6 +25,7 @@ class Generator:
         miejsce_zak = Miejsce(id_miejsca)
         with open('./bulks/rents.bulk', 'w', encoding="utf-8") as file:
             for i in range(self.number_of_records):
+
                 miejsce_rozp = Miejsce(id_miejsca)
                 miejsce_rozp.czy_miejsce_dedykowane = miejsce_zak.czy_miejsce_dedykowane
                 miejsce_rozp.miasto = miejsce_zak.miasto
@@ -41,6 +42,12 @@ class Generator:
                 if len(podlista) != 0:
                     max_przebieg = max(podlista, key=lambda x: x.przebieg, default=None)
                     przebieg += max_przebieg.przebieg
+
+
+                    miejsce_rozp.czy_miejsce_dedykowane = self.places_list[max_przebieg.id_miejsca_zakonczenia]
+                    miejsce_rozp.miasto = miejsce_zak.miasto
+                    miejsce_rozp.miasto = self.places_list[max_przebieg.]
+                    miejsce_rozp.wspolrzedne = miejsce_zak.wspolrzedne
 
                 uzytkownik = random.choice(self.users_list)
 
