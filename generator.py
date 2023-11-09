@@ -10,7 +10,7 @@ import names
 from tools import create_city
 
 class Generator:
-    def __init__(self, n):
+    def __init__(self, n1, n2):
         self.id_miejsca = 1
         self.id_rent = 1
         self.users_list = []
@@ -19,9 +19,9 @@ class Generator:
         self.opinion_list = []
         self.places_list = []
         self.report_list = []
-        self.generate_snapshot_1(n)
+        self.generate_snapshot_1(n1)
 
-        self.generate_snapshot_2(2, n)
+        self.generate_snapshot_2(n2, n1)
 
     def generate_rents(self, n):
         for _ in range(n):
@@ -107,7 +107,7 @@ class Generator:
 
 
     def generate_snapshot_2(self, n2, n1):
-        num_of_users = random.randint(0, n2)
+        num_of_users = random.randint(2, n2)
         for _ in range(num_of_users):
             i = random.randint(0, n2-1)
             change = random.choice(['imie', 'nazwisko', 'adres'])

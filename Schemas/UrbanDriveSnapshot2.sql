@@ -1,6 +1,6 @@
-CREATE DATABASE UrbanDriveSnapshot2
+--CREATE DATABASE UrbanDriveSnapshot2
 
-use UrbanDrive
+use UrbanDriveSnapshot2
 
 CREATE TABLE Miejsca
 (
@@ -66,6 +66,7 @@ select * from Wypozyczenia
 select * from Uzytkownicy
 select * from OcenyPrzejazdu
 select * from Samochody
+
 
 /*
 drop TABLE Miejsca

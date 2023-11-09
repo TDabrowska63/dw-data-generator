@@ -1,4 +1,4 @@
-CREATE DATABASE UrbanDriveSnapshot1
+--CREATE DATABASE UrbanDriveSnapshot1
 
 use UrbanDriveSnapshot1
 
