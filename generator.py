@@ -9,10 +9,13 @@ import random
 import names
 from tools import create_city
 
+
 class Generator:
     def __init__(self, n1, n2):
         self.id_miejsca = 1
         self.id_rent = 1
+        self.id_samochodu = 1
+        self.id_uzytkownika = 1
         self.users_list = []
         self.cars_list = []
         self.rental_list = []
@@ -34,7 +37,7 @@ class Generator:
             self.places_list.append(miejsce_zak)
 
             samochod = random.choice(self.cars_list)
-            podlista = [r for r in self.rental_list if r.nr_rejestracyjny_samochodu == samochod.nr_rejestracyjny]
+            podlista = [r for r in self.rental_list if r.id_samochodu == samochod.id_samochodu]
             przebieg = random.randint(0, 100)
             if len(podlista) != 0:
                 max_przebieg = max(podlista, key=lambda x: x.przebieg, default=None)
@@ -47,7 +50,7 @@ class Generator:
 
             uzytkownik = random.choice(self.users_list)
 
-            wypozyczenie = Wypozyczenie(self.id_rent, przebieg, samochod.nr_rejestracyjny, uzytkownik.nr_prawa_jazdy,
+            wypozyczenie = Wypozyczenie(self.id_rent, przebieg, samochod.id_samochodu, uzytkownik.id_uzytkownika,
                                         miejsce_rozp.id_miejsca, miejsce_zak.id_miejsca)
             self.id_rent += 1
             self.rental_list.append(wypozyczenie)
@@ -73,7 +76,6 @@ class Generator:
             for rent in self.rental_list:
                 file.write(str(rent))
 
-
     def generate_opinions(self, n):
         if n == 0:
             for rent in self.rental_list:
@@ -84,15 +86,17 @@ class Generator:
             for rent in podlista:
                 opinion = Oceny_przejazdu(rent.id_wypozyczenia)
                 self.opinion_list.append(opinion)
+
     def generate_cars(self, n):
         for _ in range(n):
-            car = Samochod()
+            car = Samochod(self.id_samochodu)
+            self.id_samochodu += 1
             self.cars_list.append(car)
-
 
     def generate_users(self, n):
         for i in range(n):
-            uzytkownik = Uzytkownik()
+            uzytkownik = Uzytkownik(self.id_uzytkownika)
+            self.id_uzytkownika += 1
             self.users_list.append(uzytkownik)
 
     def generate_snapshot_1(self, n):
@@ -103,8 +107,6 @@ class Generator:
         self.report_list = generate_zgloszenia(n, self.cars_list)
         self.write_all('bulks')
         write_reports('zgloszenia1.csv', self.report_list)
-
-
 
     def generate_snapshot_2(self, n2, n1):
         num_of_users = random.randint(2, n2)
